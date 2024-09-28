@@ -4,6 +4,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from '@/components/navbar/Navbar';
 import Providers from "./providers";
+import {ClerkProvider} from '@clerk/nextjs';
+
 const inter = Inter({subsets: ['latin']})
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,6 +30,7 @@ export default function RootLayout({
 }>) {
 
   return (
+    <ClerkProvider>
     <html lang='en' suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
@@ -36,5 +39,6 @@ export default function RootLayout({
        </Providers>
       </body>
     </html>
+    </ClerkProvider>
   );
 }
