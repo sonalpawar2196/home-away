@@ -11,7 +11,7 @@ import { Button } from '../ui/button';
 import UserIcon from './UserIcon';
 import { links } from '@/utils/links';
 import SignOutLink from './SignOutLink';
-
+import { SignedIn, SignedOut, SignInButton, SignUpButton } from '@clerk/nextjs';
 function LinksDropdown() {
   return (
     <DropdownMenu>
@@ -22,6 +22,21 @@ function LinksDropdown() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-52' align='start' sideOffset={10}>
+        <SignedOut>
+          <DropdownMenuItem>
+            <SignInButton mode='modal'> 
+              <button className='w-full text-left'> Login </button>
+            </SignInButton>
+          </DropdownMenuItem>
+
+          <DropdownMenuItem>
+            <SignUpButton mode='modal'> 
+              <button className='w-full text-left'> Register </button>
+            </SignUpButton>
+            <DropdownMenuSeparator />
+          </DropdownMenuItem>
+        </SignedOut>
+        <SignedIn>
         {links.map((link) => {
           return (
             <DropdownMenuItem key={link.href}>
@@ -31,6 +46,11 @@ function LinksDropdown() {
             </DropdownMenuItem>
           );
         })}
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <SignOutLink />
+        </DropdownMenuItem>
+        </SignedIn>
       </DropdownMenuContent>
     </DropdownMenu>
   );
